@@ -38,17 +38,15 @@ struct ContentView: View {
     var body: some View {
         NavigationSplitView {
             VStack(spacing: 0) {
-                List(AppSection.allCases, selection: $selection) { section in
-                    HStack {
-                        Label(section.title, systemImage: section.icon)
-                        Spacer()
-                        if let count = count(for: section) {
-                            Text("\(count)")
-                                .font(.caption.monospacedDigit())
-                                .foregroundStyle(.secondary)
-                        }
+                List(AppSection.allCases) { section in
+                    Button {
+                        selection = section
+                    } label: {
+                        sidebarRow(for: section)
                     }
-                    .tag(section)
+                    .buttonStyle(.plain)
+                    .listRowInsets(EdgeInsets(top: 3, leading: 8, bottom: 3, trailing: 8))
+                    .listRowBackground(Color.clear)
                 }
 
                 Divider()
@@ -80,6 +78,28 @@ struct ContentView: View {
             try? StudyPlanner.ensureToday(in: modelContext)
             await requestNotificationsOnFirstLaunch()
         }
+    }
+
+    private func sidebarRow(for section: AppSection) -> some View {
+        let isSelected = selection == section
+        return HStack {
+            Label(section.title, systemImage: section.icon)
+            Spacer()
+            if let count = count(for: section) {
+                Text("\(count)")
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(isSelected ? .white.opacity(0.82) : .secondary)
+            }
+        }
+        .foregroundStyle(isSelected ? .white : .primary)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 7)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            RoundedRectangle(cornerRadius: 8)
+                .fill(isSelected ? AppTheme.accent : Color.clear)
+        }
+        .contentShape(RoundedRectangle(cornerRadius: 8))
     }
 
     private func count(for section: AppSection) -> Int? {

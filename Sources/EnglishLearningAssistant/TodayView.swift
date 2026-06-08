@@ -60,6 +60,7 @@ struct TodayView: View {
                     .foregroundStyle(.secondary)
                 Text("今天，学一点就很好")
                     .font(.system(size: 30, weight: .semibold, design: .serif))
+                    .foregroundStyle(AppTheme.accent)
             }
             Spacer()
             VStack(alignment: .trailing, spacing: 5) {
@@ -69,6 +70,7 @@ struct TodayView: View {
                     value: Double(completedCount),
                     total: Double(max(allTodayItems.count, 1))
                 )
+                .tint(AppTheme.accent)
                 .frame(width: 130)
             }
         }

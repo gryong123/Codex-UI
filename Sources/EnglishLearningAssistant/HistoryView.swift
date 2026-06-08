@@ -32,6 +32,7 @@ struct HistoryView: View {
                 HStack {
                     Text(status.title)
                         .font(.system(size: 30, weight: .semibold, design: .serif))
+                        .foregroundStyle(AppTheme.accent)
                     Spacer()
                     Text("\(filteredProgress.count) 条")
                         .foregroundStyle(.secondary)
@@ -61,6 +62,7 @@ struct HistoryView: View {
                 if let word = ContentRepository.shared.vocabulary(id: item.contentID) {
                     Text(word.word)
                         .font(.title2.weight(.semibold))
+                        .foregroundStyle(AppTheme.accent)
                     Text(word.meaning)
                         .foregroundStyle(.secondary)
                     Spacer()
@@ -68,6 +70,7 @@ struct HistoryView: View {
                 } else if let grammar = ContentRepository.shared.grammar(id: item.contentID) {
                     Text(grammar.title)
                         .font(.title2.weight(.semibold))
+                        .foregroundStyle(AppTheme.accent)
                     Spacer()
                     SpeakButton(text: grammar.example, compact: true)
                 }
@@ -102,13 +105,14 @@ struct HistoryView: View {
                     )
                 }
                 .buttonStyle(.bordered)
+                .tint(AppTheme.accent)
             }
         }
         .padding(18)
         .background(.background, in: RoundedRectangle(cornerRadius: 8))
         .overlay {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.separator, lineWidth: 1)
+                .stroke(AppTheme.accentBorder, lineWidth: 1)
         }
     }
 

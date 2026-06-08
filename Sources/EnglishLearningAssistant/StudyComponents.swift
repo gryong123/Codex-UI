@@ -2,7 +2,9 @@ import SwiftData
 import SwiftUI
 
 enum AppTheme {
-    static let accent = Color.orange
+    static let accent = Color(red: 0.94, green: 0.38, blue: 0.10)
+    static let accentSoft = Color(red: 0.94, green: 0.38, blue: 0.10).opacity(0.12)
+    static let accentBorder = Color(red: 0.94, green: 0.38, blue: 0.10).opacity(0.26)
 }
 
 struct SpeakButton: View {
@@ -28,6 +30,7 @@ struct SpeakButton: View {
             }
         }
         .buttonStyle(.borderless)
+        .tint(AppTheme.accent)
         .help(isSpeaking ? "停止朗读" : "朗读英文")
         .accessibilityLabel(isSpeaking ? "停止朗读 \(text)" : "朗读 \(text)")
     }
@@ -85,6 +88,7 @@ struct VocabularyCard: View {
                 VStack(alignment: .leading, spacing: 5) {
                     Text(entry.word)
                         .font(.system(size: 34, weight: .semibold, design: .serif))
+                        .foregroundStyle(AppTheme.accent)
                         .textSelection(.enabled)
                     HStack(spacing: 8) {
                         Text(entry.phonetic)
@@ -93,7 +97,8 @@ struct VocabularyCard: View {
                             .font(.caption)
                             .padding(.horizontal, 7)
                             .padding(.vertical, 3)
-                            .background(.quaternary, in: RoundedRectangle(cornerRadius: 4))
+                            .foregroundStyle(AppTheme.accent)
+                            .background(AppTheme.accentSoft, in: RoundedRectangle(cornerRadius: 4))
                     }
                 }
                 Spacer()
@@ -144,12 +149,13 @@ struct VocabularyCard: View {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(note.category)
                             .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(AppTheme.accent)
                         Text(note.explanation)
                             .foregroundStyle(.secondary)
                         Text(note.pattern)
                             .font(.system(.body, design: .monospaced))
                             .padding(8)
-                            .background(.quaternary, in: RoundedRectangle(cornerRadius: 5))
+                            .background(AppTheme.accentSoft, in: RoundedRectangle(cornerRadius: 5))
                     }
                 }
             }
@@ -167,7 +173,7 @@ struct VocabularyCard: View {
         .background(.background, in: RoundedRectangle(cornerRadius: 8))
         .overlay {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.separator, lineWidth: 1)
+                .stroke(AppTheme.accentBorder, lineWidth: 1)
         }
     }
 }
@@ -188,6 +194,7 @@ struct GrammarCard: View {
 
             Text(entry.title)
                 .font(.system(size: 28, weight: .semibold, design: .serif))
+                .foregroundStyle(AppTheme.accent)
             Text(entry.explanation)
                 .font(.title3)
 
@@ -195,7 +202,7 @@ struct GrammarCard: View {
                 .font(.system(.body, design: .monospaced))
                 .padding(12)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .background(.quaternary, in: RoundedRectangle(cornerRadius: 6))
+                .background(AppTheme.accentSoft, in: RoundedRectangle(cornerRadius: 6))
 
             ExampleBlock(english: entry.example, translation: entry.translation)
 
@@ -212,7 +219,7 @@ struct GrammarCard: View {
         .background(.background, in: RoundedRectangle(cornerRadius: 8))
         .overlay {
             RoundedRectangle(cornerRadius: 8)
-                .stroke(.separator, lineWidth: 1)
+                .stroke(AppTheme.accentBorder, lineWidth: 1)
         }
     }
 }
