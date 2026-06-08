@@ -1,6 +1,10 @@
 import SwiftData
 import SwiftUI
 
+enum AppTheme {
+    static let accent = Color.orange
+}
+
 struct SpeakButton: View {
     @Environment(SpeechService.self) private var speech
     let text: String
@@ -56,7 +60,7 @@ struct StatusButtons: View {
                 Label("加入生词本", systemImage: currentStatus == .saved ? "bookmark.fill" : "bookmark")
             }
             .buttonStyle(.bordered)
-            .tint(.orange)
+            .tint(AppTheme.accent)
         }
     }
 
@@ -178,7 +182,7 @@ struct GrammarCard: View {
             HStack {
                 Label("语法", systemImage: "text.book.closed")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(AppTheme.accent)
                 Spacer()
             }
 
@@ -232,7 +236,7 @@ struct ExampleBlock: View {
         .padding(.leading, 12)
         .overlay(alignment: .leading) {
             Rectangle()
-                .fill(.blue)
+                .fill(AppTheme.accent)
                 .frame(width: 3)
         }
     }
