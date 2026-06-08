@@ -32,7 +32,6 @@ struct EnglishLearningAssistantApp: App {
             ContentView()
                 .frame(width: 900, height: 620)
                 .modelContainer(container)
-                .preferredColorScheme(.light)
         } label: {
             Label("英语学习助手", systemImage: "character.book.closed")
         }
@@ -42,7 +41,6 @@ struct EnglishLearningAssistantApp: App {
             SettingsView()
                 .modelContainer(container)
                 .frame(width: 520, height: 480)
-                .preferredColorScheme(.light)
         }
     }
 }
